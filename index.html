@@ -3,13 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>repl.it</title>
+    <title>CryptoBrowser</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css"
+    />
   </head>
 
   <body>
-    <div><ul id="listaValute"></ul></div>
-    <button id="loadingButton">Fetchiaml</button>
-    <script src="script.js"></script>
+    <div>
+      <input id="searchBar" type="text" /> <br />
+      <input id="jsonContent" type="text" placeholder="pasta qui il json" />
+      <input type="date" name="" id="datePicker" />
+      <button id="loadingButton">
+        Fetchiaml!
+      </button>
+      <ul id="listaValute"></ul>
+    </div>
+    <script src="scripts/main.js"></script>
   </body>
 </html>
