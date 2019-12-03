@@ -2,7 +2,9 @@ const coinList = document.getElementById("listaValute") // lista andamento valut
 const loadingButton = document.getElementById("loadingButton") // bottone per fare la call
 const searchBar = document.getElementById("searchBar") // una futura funzione di ricerca tra le valute fetchate o da fetchare
 const dummyJson = document.getElementById("jsonContent") // per lavorare il "locale" col json
-const datePicker = document.getElementById("datePicker") // per lavorare il "locale" col json
+const datePicker = document.getElementById("datePicker") // per pickare la data precisa del valore assunto dalle valute
+const dateCheckBox = document.getElementById("dateCheckBox") // per pickare la data precisa del valore assunto dalle valute
+const message = document.getElementById("message") //
 const access_key = "c2a1f5d7eb34b12151e8977153b80446" // apiKey
 
 /*
@@ -12,35 +14,99 @@ todo: []    ricerca tramite tempo
       []    focus con grafico per la valuta che si clicca/cerca
 */
 
-//http://api.coinlayer.com/live?access_key=c2a1f5d7eb34b12151e8977153b80446 // live fetch
-//http://api.coinlayer.com/2018-04-30?access_key=c2a1f5d7eb34b12151e8977153b80446 // time-specific fetch
+// http://api.coinlayer.com/live?access_key=c2a1f5d7eb34b12151e8977153b80446 // live fetch
+// http://api.coinlayer.com/2018-04-30?access_key=c2a1f5d7eb34b12151e8977153b80446 // time-specific fetch
+
+let cryptoCashList = []
+
+const addToDisplayList = crypto => {
+  console.log(
+    "sono dentro a addToDisplayList e mi hanno detto di aggiungere " + crypto
+  )
+  const li = document.createElement("li")
+  li.innerHTML = crypto // printa tutte le valute
+  coinList.appendChild(li)
+}
+
+const UpdateList = filterPattern => {
+  coinList.innerHTML = ""
+  let toDisplay
+  if (filterPattern === "") {
+    toDisplay = cryptoCashList
+  } else {
+    toDisplay = cryptoCashList.filter(crypto => {
+      //cryptoCashList.includes(filterPattern)
+      return crypto.includes(filterPattern)
+    })
+  }
+  toDisplay.forEach(crypto => addToDisplayList(crypto))
+}
 
 const loadData = async () => {
+  cryptoCashList = []
   coinList.innerHTML = ""
-  let searchTerm = searchBar.value
+  message.innerHTML = ""
+  let searchTerm = searchBar.value.toUpperCase()
+  let datePicked = datePicker.value
   // let data = await fetch(
   //   "http://api.coinlayer.com/live?access_key=" + access_key
   // ).then(response => response.json())
   // //fetch vera ^^^^^^^
 
-  let data = JSON.parse(dummyJson.value)
-  console.log(data)
+  let content = JSON.parse(dummyJson.value)
+  console.log(content)
   // per lavorare in locale col json, abbiamo 500 richieste mensili porca eva
   // una volta fatto dovremmo cambiarlo con la fetch vera, scritta sopra
 
-  let time = convertTimestamp(data.timestamp)
+  let time = convertTimestamp(content.timestamp)
   console.log(time)
   const li = document.createElement("li")
-  li.innerHTML = "Analisi del " + time + " del fuso orario locale"
-  coinList.appendChild(li)
+  li.innerHTML = "Dati aggiornati al " + time + " del fuso orario locale."
+  message.appendChild(li)
 
-  Object.keys(data.rates).forEach(function(key) {
-    console.log(key, data.rates[key]) // key è il nome della cryptovaluta e data.rates[key] è il valore
-    const li = document.createElement("li")
-    //li.innerHTML = '<img src="' + element.urls.regular + '">' // giusto ma da rifare per le valute
-    li.innerHTML = key + " vale: $" + data.rates[key] // printa tutte le valute
-    coinList.appendChild(li)
+  Object.keys(content.rates).forEach(function(key) {
+    // scorro il json
+    console.log(
+      "voglio inserire " +
+        key +
+        " = $" +
+        content.rates[key] +
+        " dentro al mio array"
+    )
+    cryptoInfo = key + " = $" + content.rates[key]
+    cryptoCashList.push(cryptoInfo)
+
+    // todo: fetch in base alla data, controllando che l'utente voglia
+    //       davvero filtrare in base ad un giorno preciso
+
+    //console.log(key, content.rates[key]) // key è il nome della cryptovaluta e content.rates[key] è il valore
+    //const li = document.createElement("li")
+    //li.innerHTML = key + " = $" + content.rates[key] // printa tutte le valute
+    //coinList.appendChild(li)
   })
+
+  console.log(
+    "dentro all'array ci ho trovato " +
+      cryptoCashList.length +
+      " robe: \n" +
+      cryptoCashList
+  )
+
+  console.log("stai cercado " + searchTerm)
+  // console.log(
+  //   "mo cerco se il tuo termine ci sta dentro alla mia lista di valute.\n" +
+  //     cryptoCashList.includes("ADA")
+  // )
+
+  UpdateList(searchTerm)
+
+  // Object.keys(content.rates).forEach(function(key) {
+  //   // scorro il json
+  //   console.log(key, content.rates[key]) // key è il nome della cryptovaluta e content.rates[key] è il valore
+  //   const li = document.createElement("li")
+  //   li.innerHTML = key + " = $" + content.rates[key] // printa tutte le valute
+  //   coinList.appendChild(li)
+  // })
 
   // data.rates.forEach(element => {
   //   console.log(element)
@@ -49,10 +115,17 @@ const loadData = async () => {
   //   li.innerHTML = element.toString // boh
   //   coinList.appendChild(li)
   // })
+  // console.log(datePicker.value) // risulta in un "2019-12-05"
 }
 
 loadingButton.onclick = loadData
-searchBar.onchange = loadData
+//searchBar.onchange = loadData
+
+searchBar.oninput = e => {
+  const toMatch = e.target.value.toUpperCase()
+  //console.log("change " + toMatch)
+  UpdateList(toMatch)
+}
 
 function convertTimestamp(timestamp) {
   var d = new Date(timestamp * 1000), // Convert the passed timestamp to milliseconds
