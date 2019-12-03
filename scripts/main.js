@@ -5,6 +5,7 @@ const dummyJson = document.getElementById("jsonContent") // per lavorare il "loc
 const datePicker = document.getElementById("datePicker") // per pickare la data precisa del valore assunto dalle valute
 const dateCheckBox = document.getElementById("dateCheckBox") // per pickare la data precisa del valore assunto dalle valute
 const message = document.getElementById("message") //
+const sortButton = document.getElementById("sortButton") //
 const access_key = "c2a1f5d7eb34b12151e8977153b80446" // apiKey
 
 /*
@@ -17,6 +18,7 @@ todo: []    ricerca tramite tempo
 // http://api.coinlayer.com/live?access_key=c2a1f5d7eb34b12151e8977153b80446 // live fetch
 // http://api.coinlayer.com/2018-04-30?access_key=c2a1f5d7eb34b12151e8977153b80446 // time-specific fetch
 
+let valuesMap = new Map() // todo: riscrivere un po' tutto in maniera tale che tutto gira con la mappa e non con l'array di stringa semplice
 let cryptoCashList = []
 
 const addToDisplayList = crypto => {
@@ -42,8 +44,20 @@ const UpdateList = filterPattern => {
   toDisplay.forEach(crypto => addToDisplayList(crypto))
 }
 
+function sortMap() {
+  valuesMap = new Map([...valuesMap.entries()].sort((a, b) => a[0] > b[0])) // non va, ordina le key e non le values
+  let out =
+    "dentro alla mappa ordinata ci ho trovato " + valuesMap.size + " robe: \n"
+
+  for (let entry of valuesMap) {
+    out += entry.toString() + "\n"
+  }
+  console.log(out)
+}
+
 const loadData = async () => {
   cryptoCashList = []
+  valuesMap.clear()
   coinList.innerHTML = ""
   message.innerHTML = ""
   let searchTerm = searchBar.value.toUpperCase()
@@ -75,6 +89,7 @@ const loadData = async () => {
     )
     cryptoInfo = key + " = $" + content.rates[key]
     cryptoCashList.push(cryptoInfo)
+    valuesMap.set(key, content.rates[key])
 
     // todo: fetch in base alla data, controllando che l'utente voglia
     //       davvero filtrare in base ad un giorno preciso
@@ -91,6 +106,13 @@ const loadData = async () => {
       " robe: \n" +
       cryptoCashList
   )
+
+  let out = "dentro alla mappa ci ho trovato " + valuesMap.size + " robe: \n"
+
+  for (let entry of valuesMap) {
+    out += entry.toString() + "\n"
+  }
+  console.log(out)
 
   console.log("stai cercado " + searchTerm)
   // console.log(
@@ -120,6 +142,7 @@ const loadData = async () => {
 
 loadingButton.onclick = loadData
 //searchBar.onchange = loadData
+sortButton.onclick = sortMap
 
 searchBar.oninput = e => {
   const toMatch = e.target.value.toUpperCase()
