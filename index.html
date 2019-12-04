@@ -7,29 +7,48 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
     <link
       rel="stylesheet"
-      href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css"
+      href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/dark.min.css"
     />
   </head>
 
   <body>
     <div>
-      <input id="searchBar" type="text" /> <br />
-      <input id="jsonContent" type="text" placeholder="pasta qui il json" />
-      <input type="date" name="" id="datePicker" />
+      <input
+        id="searchBar"
+        type="text"
+        placeholder="Cerca una moneta"
+        style="display: inline;"
+      />
+      <input
+        id="jsonContent"
+        type="text"
+        placeholder="pasta qui il json"
+        style="display: inline;"
+      />
       <button id="loadingButton">
         Fetchiaml!
       </button>
-      <button id="sortButton">
+      <button id="sortButton" style="display: inline;">
         Dal meno al più
       </button>
-      <input type="checkbox" name="dateSearch" value="filterByDate" id="" />
-      Giorno specifico<br />
-      <p id="message"></p>
+      <input type="date" name="" id="datePicker" style="display: inline;" />
+      <p style="display: inline;">
+        <input
+          type="checkbox"
+          name="dateSearch"
+          value="filterByDate"
+          id=""
+          placeholder="Cerca una moneta"
+          style="display: inline;"
+        />
+        Giorno specifico
+      </p>
       <br />
+      <small id="message"></small>
       <ul
         id="listaValute"
         style="display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 2fr 2fr 2fr 2fr;
       list-style-type: none;
       list-style: none;"
       ></ul>

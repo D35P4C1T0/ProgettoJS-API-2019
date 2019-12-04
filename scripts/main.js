@@ -74,9 +74,7 @@ const loadData = async () => {
 
   let time = convertTimestamp(content.timestamp)
   console.log(time)
-  const li = document.createElement("li")
-  li.innerHTML = "Dati aggiornati al " + time + " del fuso orario locale."
-  message.appendChild(li)
+  message.innerHTML = "Dati aggiornati al " + time + " del fuso orario locale."
 
   Object.keys(content.rates).forEach(function(key) {
     // scorro il json
