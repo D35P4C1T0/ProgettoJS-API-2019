@@ -32,7 +32,7 @@ Elenco partecipanti
 ## Ruoli
 
 - PROJECT_MANAGER = Girardi Matteo
-- DOCUMENTAZIONE = Girardi Matteo
+- DOCUMENTAZIONE = Girardi Matteo - Badea Vlad
 - CODING JS = Girardi Matteo
 - CODING UI = Badea Vlad - Girardi Matteo
 
