@@ -1,8 +1,16 @@
 # Lavoro di Gruppo Badea-Girardi
 
-## Titolo progetto todo
+## Titolo progetto: CryptoBrowser
 
-Ogni gruppo definisce un titolo progetto (< 100 caratteri) e una descrizione(< 5000 parole).
+## Descrizione progetto:
+
+Raggruppiamo le informazioni e i dati delle più importanti cryptovalute
+sul mercato, disponendo in sintesi tutto il necessario per chiunque fosse
+interessato nell'andamento generale e delle singolve monete.
+
+<!-- Ogni gruppo definisce un titolo progetto (< 100 caratteri) e una descrizione(< 5000 parole). -->
+
+### Fonti di possibili API:
 
 - https://github.com/public-apis/public-apis
 - https://www.programmableweb.com/apis/directory
@@ -10,9 +18,13 @@ Ogni gruppo definisce un titolo progetto (< 100 caratteri) e una descrizione(< 5
 - openweathermap: https://openweathermap.org/api
 - google maps (geocoding inverso)
 
+### API utilizzate:
+
+- https://coinlayer.com/
+
 ## Partecipanti
 
-Elenco partecipanti \
+Elenco partecipanti
 
 - Badea Vlad
 - Girardi Matteo
@@ -20,9 +32,9 @@ Elenco partecipanti \
 ## Ruoli
 
 - PROJECT_MANAGER = Girardi Matteo
-- DOCUMENTAZIONE = Entrambi
+- DOCUMENTAZIONE = Girardi Matteo
 - CODING JS = Girardi Matteo
-- CODING UI = Badea Vlad
+- CODING UI = Badea Vlad - Girardi Matteo
 
 ## Regolamento
 
