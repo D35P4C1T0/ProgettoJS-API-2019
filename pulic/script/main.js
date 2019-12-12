@@ -5,7 +5,7 @@ const dummyJson = document.getElementById("jsonContent") // per lavorare il "loc
 const datePicker = document.getElementById("datePicker") // per pickare la data precisa del valore assunto dalle valute
 const dateCheckBox = document.getElementById("dateCheckBox") // per pickare la data precisa del valore assunto dalle valute
 const message = document.getElementById("message") //
-const sortButton = document.getElementById("sortButton") //
+const sortButtonDesc = document.getElementById("sortButton") //
 const access_key = "c2a1f5d7eb34b12151e8977153b80446" // apiKey
 
 /*
@@ -19,44 +19,58 @@ todo: []    ricerca tramite tempo
 // http://api.coinlayer.com/2018-04-30?access_key=c2a1f5d7eb34b12151e8977153b80446 // time-specific fetch
 
 let valuesMap = new Map() // todo: riscrivere un po' tutto in maniera tale che tutto gira con la mappa e non con l'array di stringa semplice
-let cryptoCashList = []
+//let cryptoCashList = []
 
-const addToDisplayList = crypto => {
-  console.log(
-    "sono dentro a addToDisplayList e mi hanno detto di aggiungere " + crypto
-  )
+const addToDisplayList = (key, value) => {
+  // console.log(
+  //   "sono dentro a addToDisplayList e mi hanno detto di aggiungere " +
+  //     key +
+  //     "=" +
+  //     value
+  // )
   const li = document.createElement("li")
-  li.innerHTML = crypto // printa tutte le valute
+  li.innerHTML = key + " = " + value // printa tutte le valute
   coinList.appendChild(li)
 }
 
 const UpdateList = filterPattern => {
   coinList.innerHTML = ""
-  let toDisplay
+  let toDisplay = new Map()
   if (filterPattern === "") {
-    toDisplay = cryptoCashList
+    //toDisplay = cryptoCashList
+    toDisplay = new Map(valuesMap)
   } else {
-    toDisplay = cryptoCashList.filter(crypto => {
-      //cryptoCashList.includes(filterPattern)
-      return crypto.includes(filterPattern)
-    })
+    toDisplay = new Map(valuesMap)
+    for (let chiave of toDisplay.keys()) {
+      if (!chiave.includes(filterPattern)) toDisplay.delete(chiave)
+    }
   }
-  toDisplay.forEach(crypto => addToDisplayList(crypto))
+  //toDisplay.forEach(crypto => addToDisplayList(crypto))
+  for (let entry of toDisplay.entries()) {
+    // toDisplay è una mappa
+    addToDisplayList(entry[0], entry[1])
+    // entry è un array [key, value]
+  }
 }
 
-function sortMap() {
-  valuesMap = new Map([...valuesMap.entries()].sort((a, b) => a[0] > b[0])) // non va, ordina le key e non le values
-  let out =
-    "dentro alla mappa ordinata ci ho trovato " + valuesMap.size + " robe: \n"
+function sortMapDecreasing(mappa) {
+  const out = new Map([...mappa.entries()].sort((a, b) => b[1] - a[1]))
+  return out
+}
 
-  for (let entry of valuesMap) {
-    out += entry.toString() + "\n"
-  }
-  console.log(out)
+function sortMapIncreasing(mappa) {
+  const out = new Map([...mappa.entries()].sort((a, b) => a[1] - b[1]))
+  return out
+}
+
+const sortMap = () => {
+  valuesMap = sortMapDecreasing(valuesMap)
+  let searchTerm = searchBar.value.toUpperCase()
+  UpdateList(searchTerm)
 }
 
 const loadData = async () => {
-  cryptoCashList = []
+  //cryptoCashList = []
   valuesMap.clear()
   coinList.innerHTML = ""
   message.innerHTML = ""
@@ -68,26 +82,26 @@ const loadData = async () => {
   // //fetch vera ^^^^^^^
 
   let content = JSON.parse(dummyJson.value)
-  console.log(content)
+  //console.log(content)
   // per lavorare in locale col json, abbiamo 500 richieste mensili porca eva
   // una volta fatto dovremmo cambiarlo con la fetch vera, scritta sopra
 
   let time = convertTimestamp(content.timestamp)
-  console.log(time)
+  //console.log(time)
   message.innerHTML = "Dati aggiornati al " + time + " del fuso orario locale."
 
   Object.keys(content.rates).forEach(function(key) {
     // scorro il json
-    console.log(
-      "voglio inserire " +
-        key +
-        " = $" +
-        content.rates[key] +
-        " dentro al mio array"
-    )
-    cryptoInfo = key + " = $" + content.rates[key]
-    cryptoCashList.push(cryptoInfo)
+    // console.log(
+    //   "voglio inserire " +
+    //     key +
+    //     " = $" +
+    //     content.rates[key] +
+    //     " dentro al mio array"
+    // )
+    //cryptoInfo = key + " = $" + content.rates[key]
     valuesMap.set(key, content.rates[key])
+    //cryptoCashList.push(cryptoInfo)
 
     // todo: fetch in base alla data, controllando che l'utente voglia
     //       davvero filtrare in base ad un giorno preciso
@@ -98,15 +112,7 @@ const loadData = async () => {
     //coinList.appendChild(li)
   })
 
-  console.log(
-    "dentro all'array ci ho trovato " +
-      cryptoCashList.length +
-      " robe: \n" +
-      cryptoCashList
-  )
-
   let out = "dentro alla mappa ci ho trovato " + valuesMap.size + " robe: \n"
-
   for (let entry of valuesMap) {
     out += entry.toString() + "\n"
   }
@@ -140,7 +146,7 @@ const loadData = async () => {
 
 loadingButton.onclick = loadData
 //searchBar.onchange = loadData
-sortButton.onclick = sortMap
+sortButtonDesc.onclick = sortMap
 
 searchBar.oninput = e => {
   const toMatch = e.target.value.toUpperCase()
