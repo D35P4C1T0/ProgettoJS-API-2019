@@ -1,110 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
     <script src="snow.js"></script>
-    <script src="file.js"></script>
-    <title>Document</title>
-</head>
-<body id="body">
+    <title>CryptoBrowser</title>
+  </head>
+  <body id="body">
     <audio loop id="last" src="media/1.mp3"></audio>
     <div class="container">
-         <div class="box">
-            <img src="media/1.jpg" alt="">
-            <span id="txt_search">Search</span>
-        </div>
-        <div class="box">
-            <img src="media/2.jpg" alt="">
-            <span id="txt_exchange">Exchange</span>
-        </div>
-        <div class="box">
-            <img src="media/3.jpg" alt="">
-            <span id="txt_analyze">Analyze</span>
-        </div>
+      <div class="box">
+        <img src="media/1.jpg" alt="" />
+        <span id="txt_search">Search</span>
+      </div>
+      <div class="box">
+        <img src="media/2.jpg" alt="" />
+        <span id="txt_exchange">Exchange</span>
+      </div>
+      <div class="box">
+        <img src="media/3.jpg" alt="" />
+        <span id="txt_analyze">Analyze</span>
+      </div>
     </div>
-    <P>
-        <h1 id="txt_title" style="text-align: center ">Discover the cryptocurrencies world!</h1>
-    </P>
-    <div class="container-fluid">
-            <div class="row" id=row0>
-                <div class="col">
-                    <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-sm">
-                                    <thead>
-                                    <tr id="tr">
-                                        <th>Name</th>
-                                        <th>Value</th>
-                                        <th> </th>
-                                        <th>Name</th>
-                                        <th>Value</th>
-                                        <th> </th>
-                                        <th>Name</th>
-                                        <th>Value</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr id="tr1">
-                                        <td>qwe</td>
-                                        <td>87987</td>
-                                        <td></td>
-                                        <td>qwe</td>
-                                        <td>98798</td>
-                                        <td></td>
-                                        <td>qwe</td>
-                                        <td>98798</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="row" id="row1">
-                        <div class="container" id="container1">
-                            <input id="button" class="form-control button" type="text" disabled value="USD">
-                            <input id="button1" class="form-control button" type="text" name="value_dollaro" disabled value="1">
-                        </div>
-                    </div>
-                    <div class="row" id="row2">
-                        <img src="4.png" id="img_icon">
-                    </div>
-                    <div class="row" id="row1">
-                        <div class="container" id="container1">
-                            <input id="button2" class="form-control button" type="text" name="type_crypto">
-                            <input id="button3" class="form-control button" type="text" name="value_crypto">
-                        </div>
-                    </div>
-                    <div class="row" id="row3">
-                        <input id="button_exchange" type="submit" class="btn btn-outline-dark" name="exchange" value="Exchange">
-                    </div>
-                    <canvas class="my-4 chartjs_render_monitor" id="myChart">
 
-                    </canvas>
-                </div>
-            </div>
+    <h1 id="txt_title" style="text-align: center ">
+      Discover the cryptocurrencies world!
+    </h1>
+
+    <div class="container-fluid">
+      <div class="row" id="row0">
+        <div class="col">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered table-sm">
+              <thead>
+                <tr id="tableHead">
+                  <th>Name</th>
+                  <th>Value</th>
+                  <!-- <th></th> -->
+                  <th>Name</th>
+                  <th>Value</th>
+                  <!-- <th></th> -->
+                  <th>Name</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+          </div>
         </div>
-        <div id="footer" class="container-fluid" style="background-color: lightgrey; height: 200px">
-            <div class="row">
-                <div class="col" id="col_footer1">
-                    <div class="row">
-                        <img id="insta_img" src="media/instagram.png">
-                        <a id="insta_gira" style="color: black" href="https://www.instagram.com/drippinjunka/">drippinjunka</a>
-                    </div>
-                    <div class="row">
-                        <img id="insta_img1" src="media/instagram.png">
-                        <a id="insta_vlad" style="color: black" href="https://www.instagram.com/vladbadea_/">vladbadea_</a>
-                    </div>
-                </div>
-                <div class="col" id="col_footer2">
-                    <input id="button_snow" type="submit" name="snow" value="Let it snow" class="btn btn-outline-dark" onclick="initSnow()">
-                </div>
-                <div class="col">
-                    
-                </div>
+        <div class="col">
+          <div class="row" id="row1">
+            <div class="container" id="container1">
+              <input
+                id="button"
+                class="form-control button"
+                type="text"
+                disabled
+                value="USD"
+              />
+              <input
+                id="button1"
+                class="form-control button"
+                type="text"
+                name="value_dollaro"
+                disabled
+                value="1"
+              />
             </div>
+          </div>
+          <div class="row" id="row2">
+            <img src="media/4.png" id="img_icon" alt="" />
+          </div>
+          <div class="row" id="row1">
+            <div class="container" id="container1">
+              <input
+                id="searchBar"
+                class="form-control button"
+                type="text"
+                name="type_crypto"
+              />
+              <input
+                id="dummyJson"
+                class="form-control button"
+                type="text"
+                name="value_crypto"
+              />
+            </div>
+          </div>
+          <div class="row" id="row3">
+            <input
+              id="loadingButton"
+              type="button"
+              class="btn btn-outline-dark"
+              name="exchange"
+              value="Exchange"
+            />
+          </div>
+          <canvas class="my-4 chartjs_render_monitor" id="myChart"> </canvas>
         </div>
-</body>
+      </div>
+    </div>
+    <div
+      id="footer"
+      class="container-fluid"
+      style="background-color: lightgrey; height: 200px"
+    >
+      <div class="row">
+        <div class="col" id="col_footer1">
+          <div class="row">
+            <img id="insta_img" src="media/instagram.png" />
+            <a
+              id="insta_gira"
+              style="color: black"
+              href="https://www.instagram.com/drippinjunka/"
+              >drippinjunka</a
+            >
+          </div>
+          <div class="row">
+            <img id="insta_img1" src="media/instagram.png" />
+            <a
+              id="insta_vlad"
+              style="color: black"
+              href="https://www.instagram.com/vladbadea_/"
+              >vladbadea_</a
+            >
+          </div>
+        </div>
+        <div class="col" id="col_footer2">
+          <input
+            id="button_snow"
+            type="submit"
+            name="snow"
+            value="Let it snow"
+            class="btn btn-outline-dark"
+            onclick="initSnow()"
+          />
+        </div>
+        <div class="col"></div>
+      </div>
+    </div>
+    <script src="script/main.js"></script>
+  </body>
 </html>
