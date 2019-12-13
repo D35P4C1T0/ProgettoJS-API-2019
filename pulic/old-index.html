@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>CryptoBrowser</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/dark.min.css"
+    />
+  </head>
+
+  <body>
+    <div>
+      <input
+        id="searchBar"
+        type="text"
+        placeholder="Cerca una moneta"
+        style="display: inline;"
+      />
+      <input
+        id="jsonContent"
+        type="text"
+        placeholder="pasta qui il json"
+        style="display: inline;"
+      />
+      <button id="loadingButton">
+        Aggiorna
+      </button>
+      <button id="sortButton" style="display: inline;">
+        Ordina per valore decrescente
+      </button>
+      <input type="date" name="" id="datePicker" style="display: inline;" />
+
+      <br />
+      <small id="message"></small>
+      <ul
+        id="listaValute"
+        style="display: grid;
+      grid-template-columns: 2fr 2fr 2fr 2fr;
+      list-style-type: none;
+      list-style: none;"
+      ></ul>
+    </div>
+    <script src="script/main.js"></script>
+  </body>
+</html>

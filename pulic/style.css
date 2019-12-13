@@ -1,0 +1,82 @@
+.container {
+    display:flex;
+    width: 300%;
+    padding: 2% 2%;
+    height: 100vh;
+  }
+  
+  .box {
+    flex: 1;
+    overflow: hidden;
+    transition: .5s;
+    margin: 0 2%;
+    box-shadow: 0 20px 30px rgba(0,0,0,.5);
+    line-height: 0;
+  }
+  
+  .box > img {
+    width: 200%;
+    height: calc(100% - 10vh);
+    object-fit: cover; 
+    transition: .5s;
+  }
+  
+  .box > span {
+    font-size: 3.8vh;
+    display: block;
+    text-align: center;
+    height: 10vh;
+    line-height: 2.6;
+  }
+  
+  .box:hover { flex: 1 1 50%; }
+  .box:hover > img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .button{
+    height: 40px;
+    width: 200px;
+    margin: 0 4%;
+  }
+
+  #row0{
+    padding: 4% 0%;
+  }
+
+  #row1{
+    margin: 2% 10%;
+  }
+
+  #row2{
+    padding: 0% 47%;
+  }
+
+  #row3{
+    padding: 5% 44%;
+  }
+
+  #container1{
+    height: 60px;
+  }
+
+  #img_icon{
+    width: 50px;
+  }
+
+  #col_footer1{
+    padding: 5% 3%;
+  }
+
+  #conainer0{
+    width: 300px;
+  }
+
+  #row_footer{
+    max-height: 200px;
+  }
+
+  #col_footer2{
+    padding: 6% 30%;
+  }
